@@ -1,5 +1,8 @@
 ## Changelog
 
+### Version 0.29.0-alpha:
+- Added buttons for Data Packs and Tab Packs to the start window.
+
 ### Version 0.28.8-alpha:
 - Added a function to install and convert server packs.
 - Added a function to replace files.
@@ -25,8 +28,8 @@
 
 ### Version 0.17.6-alpha:
 - Piped `.json` files through `jsonesque` first, so comments can exist in the `.json` files.
-- Added an in-programme text-editor.
-- Added an in-programme image-viewer.
+- Added an in-program text-editor.
+- Added an in-program image-viewer.
 - Fixed opening of files if the value "system" is given.
 - Added a start window.
 - Added a resource pack installer.

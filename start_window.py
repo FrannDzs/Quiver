@@ -21,7 +21,7 @@ import functions
 
 __title__ = "StartWindow"
 __author__ = "DeflatedPickle"
-__version__ = "1.3.0"
+__version__ = "1.4.0"
 
 
 class StartWindow(tk.Toplevel):
@@ -36,36 +36,47 @@ class StartWindow(tk.Toplevel):
         self.protocol("WM_DELETE_WINDOW", sys.exit)
         self.rowconfigure(0, weight=1)
         self.columnconfigure((0, 1), weight=1)
+        self.rowconfigure((0, 1), weight=1)
 
         self.resourcepack_location = os.getenv("APPDATA").replace("\\", "/") + "/.minecraft/resourcepacks"
         self.resourcepack_location_server = os.getenv("APPDATA").replace("\\",
                                                                          "/") + "/.minecraft/server-resource-packs"
 
-        self.widget_button_new = ttk.Button(self, text="New Pack", command=self.create_new).grid(row=0, column=0,
-                                                                                                 columnspan=2,
-                                                                                                 sticky="nesw")
+        self.widget_button_new_pack = ttk.Button(self, text="New Pack", command=self.create_new).grid(row=0, column=0,
+                                                                                                      rowspan=2,
+                                                                                                      sticky="nesw")
+        self.widget_button_new_data = ttk.Button(self, text="New Data Pack", state="disabled").grid(row=0, column=1,
+                                                                                                    sticky="nesw")
+        self.widget_button_new_tab = ttk.Button(self, text="New Tab Pack", state="disabled").grid(row=1, column=1,
+                                                                                                  sticky="nesw")
+
         self.widget_button_manage_packs = ttk.Button(self, text="Manage Packs", state="disabled",
                                                      command=lambda: dialog.ManagePacks(self.parent)).grid(
-            row=1, column=0,
+            row=2, column=0,
             columnspan=2,
             sticky="ew")
-        self.widget_button_open = ttk.Button(self, text="Open Pack", command=self.open_pack).grid(row=2, rowspan=2,
+
+        self.widget_button_open = ttk.Button(self, text="Open Pack", command=self.open_pack).grid(row=3, rowspan=2,
                                                                                                   column=0,
                                                                                                   sticky="nesw")
-        self.widget_button_install = ttk.Button(self, text="Install Pack", command=self.install_pack).grid(row=2,
+        self.widget_button_install = ttk.Button(self, text="Install Pack", command=self.install_pack).grid(row=3,
                                                                                                            column=1,
                                                                                                            sticky="ew")
-        self.widget_button_install = ttk.Button(self, text="Install Zip", command=self.install_zip).grid(row=3,
+
+        self.widget_button_install = ttk.Button(self, text="Install Zip", command=self.install_zip).grid(row=4,
                                                                                                          column=1,
                                                                                                          sticky="ew")
+
         self.widget_button_open_zip = ttk.Button(self, text="Open Zip",
                                                  command=lambda: threading.Thread(target=self.open_zip).start()).grid(
-            row=4, rowspan=2, column=0, sticky="nesw")
+            row=5, rowspan=2, column=0, sticky="nesw")
         self.widget_button_patch = ttk.Button(self, text="Install Server Pack", command=self.install_server_pack).grid(
-            row=4, column=1, sticky="ew")
-        self.widget_button_patch = ttk.Button(self, text="Patch Pack", command=self.patch_pack, state="disabled").grid(
             row=5, column=1, sticky="ew")
-        self.widget_button_exit = ttk.Button(self, text="Exit", command=sys.exit).grid(row=6, column=0, columnspan=2,
+
+        self.widget_button_patch = ttk.Button(self, text="Patch Pack", command=self.patch_pack, state="disabled").grid(
+            row=6, column=1, sticky="ew")
+
+        self.widget_button_exit = ttk.Button(self, text="Exit", command=sys.exit).grid(row=7, column=0, columnspan=2,
                                                                                        sticky="ew")
 
     def create_new(self):
